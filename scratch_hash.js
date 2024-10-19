@@ -8,7 +8,7 @@ class ScratchHash {
             "name": "hash",
             "blocks": [
                         {
-                            "opcode": "fetchURL",
+                            "opcode": "hash",
                             "blockType": "reporter",
                             "text": "convert [input] to hash",
                             "arguments": {
@@ -22,7 +22,7 @@ class ScratchHash {
         };
     }
     
-	async fetchURL({input}) {
+	async hash({input}) {
 		const hashBuffer = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(input));
 		const hashArray = Array.from(new Uint8Array(hashBuffer));
 		const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
