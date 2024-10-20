@@ -66,7 +66,7 @@ class ScratchHash {
 		var text = input
 		if (sides == 0){
 			text = makerand(times) + text;
-			text = makerand(times) + text;
+			text += makerand(times)
 		}else if (sides == 1){
 			text = makerand(times) + text;
 		} else {
