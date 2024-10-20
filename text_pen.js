@@ -70,7 +70,7 @@ class TextPen {
         this.penColor = color;
     }
 
-    gettextColor() {
+    getTextColor() {
         return this.penColor;
     }
 
