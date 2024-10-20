@@ -19,13 +19,7 @@ class ScratchHash {
                             }
                         },
                 ],
-			"menus": {
-                "sides": [{text:"both",value:0}, {text:"left",value:1}, {text:"right",value:2}],
-            }            
         };
     }
-    
-	async text({text}) {
-	}
 }
 Scratch.extensions.register(new ScratchHash())
