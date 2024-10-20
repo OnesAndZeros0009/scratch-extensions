@@ -12,7 +12,7 @@ class ScratchHash {
                             "blockType": "command",
                             "text": "write text [text] at current pos",
                             "arguments": {
-                                "input": {
+                                "text": {
                                     "type": "string",
                                     "defaultValue": "apple"
                                 },
