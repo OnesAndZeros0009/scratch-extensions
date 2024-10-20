@@ -1,4 +1,3 @@
-
 class ScratchHash {
     constructor() {
     }
