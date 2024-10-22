@@ -27,41 +27,32 @@ class DataMessage {
                 },
                 {
                     "opcode": "receive",
-                    "blockType": "hat",
-                    "text": "when I receive message of type [type]",
+                    blockType: Scratch.BlockType.EVENT,
+                    "text": "when I receive message of type [FILTER_TYPE]",
                     "arguments": {
-                        "type": {
+                        "FILTER_TYPE": {
                             "type": "string",
                             "defaultValue": "turn left"
                         }
                     },
                     "isEdgeActivated": false // Prevent automatic activation
                 },
+                'happy',
                 {
                     "opcode": "getMessageData",
                     "blockType": "reporter",
                     "text": "received message data"
-                }
+                },
             ]
         };
     }
-
-    // Method to send a message with a specific type and data
     message({type, data}, util) {
-        this.lastMessageType = type;    // Store the last message type
-        this.lastMessageData = data;    // Store the last message data
-
-        // Manually trigger the hat block for the specific message type
-        util.startHats("DataMessage_receive");
-    }
+        util.startHats('DataMessage_receive', {FILTER_TYPE: reporter});
+    } 
 
     // Method to return the last received message's data
     getMessageData() {
-        return this.lastMessageData + this.lastMessageType || "";
-    }
-  
-    receive({type}) {
-      return true;
+        return this.lastMessageData
     }
 }
 
