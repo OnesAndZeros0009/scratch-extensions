@@ -8,7 +8,6 @@ class DataMessage {
         return {
             "id": "DataMessage",
             "name": "data messaging",
-
             "blocks": [
                 {
                     "opcode": "message",
@@ -17,17 +16,17 @@ class DataMessage {
                     "arguments": {
                         "type": {
                             "type": "string",
-                            "defaultValue": "turn left"
+                            "menu": "types"
                         },
                         "data": {
                             "type": "string",
-                            "defaultValue": "90"
+                            "menu": "types"
                         }
                     }
                 },
                 {
                     "opcode": "receive",
-                    blockType: Scratch.BlockType.EVENT,
+                    "blockType": Scratch.BlockType.EVENT,
                     "text": "when I receive message of type [FILTER_TYPE]",
                     "arguments": {
                         "FILTER_TYPE": {
@@ -37,22 +36,67 @@ class DataMessage {
                     },
                     "isEdgeActivated": false // Prevent automatic activation
                 },
-                'happy',
                 {
                     "opcode": "getMessageData",
                     "blockType": "reporter",
                     "text": "received message data"
                 },
+                '---',
+                {
+                    "opcode": "addtype",
+                    "blockType": "command",
+                    "text": "add message type option [type]",
+                    "arguments": {
+                        "type": {
+                            "type": "string",
+                            "menu": "turn left"
+                        }
+                    }
+                },
+                {
+                    "opcode": "deleteType",
+                    "blockType": "command",
+                    "text": "delete message type option [type]",
+                    "arguments": {
+                        "type": {
+                            "type": "string",
+                            "defaultValue": "turn left"
+                        }
+                    }
+                },
+                {
+                    "opcode": "deleteAllTypes",
+                    "blockType": "command",
+                    "text": "delete all message type options"
+                }
             ]
+            menus: {
+                  key: {
+                acceptReporters: false,
+                items: [
+                  {
+                    text: 'space',
+                    value: ' '
+                  },
+                  'a',
+                  'b',
+                  'c',
+                  // ...
+                ]
+              }
+            }
         };
     }
+
     message({type, data}, util) {
-        util.startHats('DataMessage_receive', {FILTER_TYPE: reporter});
-    } 
+        util.startHats('DataMessage_receive', {FILTER_TYPE: type});
+        this.lastMessageType = type;
+        this.lastMessageData = data;
+    }
 
     // Method to return the last received message's data
     getMessageData() {
-        return this.lastMessageData
+        return this.lastMessageData;
     }
 }
 
